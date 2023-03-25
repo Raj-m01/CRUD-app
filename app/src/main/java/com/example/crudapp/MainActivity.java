@@ -26,11 +26,11 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         addPostBtn = findViewById(R.id.fab_add_post_btn);
-
-        final PostListAdapter adapter = new PostListAdapter();
-
         // Get the ViewModel and observe the data
         postViewModel = new ViewModelProvider(this).get(PostViewModel.class);
+
+        final PostListAdapter adapter = new PostListAdapter(postViewModel);
+
         postViewModel.getAllPosts().observe(this, new Observer<List<PostModel>>() {
             @Override
             public void onChanged(List<PostModel> posts) {
@@ -38,17 +38,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         addPostBtn.setOnClickListener(view -> {
 
             Intent intent = new Intent(MainActivity.this, AddPostActivity.class);
-            intent.putExtra("ACTION_TYPE","ADD");
+            intent.putExtra("ACTION_TYPE", "ADD");
             startActivity(intent);
         });
-
 
 
     }

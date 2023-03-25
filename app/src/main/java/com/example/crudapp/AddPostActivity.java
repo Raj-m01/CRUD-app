@@ -19,6 +19,7 @@ public class AddPostActivity extends AppCompatActivity {
     EditText titleEditText, descEditText, authorEditText;
     Button submitPostBtn;
     private PostViewModel postViewModel;
+    private static final String SUCCESS = "SUCCESS";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +34,10 @@ public class AddPostActivity extends AppCompatActivity {
         submitPostBtn = findViewById(R.id.submit_post_btn);
 
         Intent intent = getIntent();
-        String actionType =intent.getStringExtra("ACTION_TYPE");
+        String actionType = intent.getStringExtra("ACTION_TYPE");
 
 
-        if(actionType.equals("EDIT")){
+        if (actionType.equals("EDIT")) {
             titleEditText.setText(intent.getStringExtra("POST_TITLE"));
             descEditText.setText(intent.getStringExtra("POST_DESC"));
             authorEditText.setText(intent.getStringExtra("POST_AUTHOR"));
@@ -50,26 +51,26 @@ public class AddPostActivity extends AppCompatActivity {
             String author = authorEditText.getText().toString().trim();
 
             String curDate = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
-            PostModel post = new PostModel(title, desc, author, curDate,0,0);
+            PostModel post = new PostModel(title, desc, author, curDate, 0, 0);
 
-            if(title.isEmpty() || desc.isEmpty() || author.isEmpty()){
-                Toast.makeText(this, "Enter All Details", Toast.LENGTH_SHORT).show();
-            }else{
+            String result = "";
 
-                if(actionType.equals("ADD")) {
-                    postViewModel.insert(post);
-                    Toast.makeText(this, "Post Added", Toast.LENGTH_SHORT).show();
-                }else{
-                    int id = intent.getIntExtra("POST_ID",-1);
-                    post.setId(id);
-                    postViewModel.update(post);
-                    Toast.makeText(this, "Post Updated", Toast.LENGTH_SHORT).show();
-                }
-
-                startActivity(new Intent(this,MainActivity.class));
-                this.finish();
-
+            if (actionType.equals("ADD")) {
+                result = postViewModel.insert(post);
+            } else {
+                int id = intent.getIntExtra("POST_ID", -1);
+                post.setId(id);
+                result = postViewModel.update(post);
             }
+
+            if (result.equals(SUCCESS)) {
+                startActivity(new Intent(this, MainActivity.class));
+                this.finish();
+            } else {
+                Toast.makeText(this, "" + result, Toast.LENGTH_SHORT).show();
+            }
+
+
         });
 
     }

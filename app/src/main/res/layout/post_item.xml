@@ -1,78 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp">
+    android:layout_margin="10dp"
+    app:cardElevation="1dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/post_title"
-        android:text="Title"
-        android:textStyle="bold"
-        android:layout_margin="5dp"
-        />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/post_desc"
-        android:text="Description"
-        android:layout_below="@+id/post_title"
-        android:maxLines="2"
-        android:layout_margin="5dp"
-        />
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/post_desc"
-        android:id="@+id/vote_btn"
-        android:layout_margin="5dp"
-        android:padding="5dp">
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/upvote_btn"
-            android:src="@drawable/ic_baseline_thumb_up_24"
-            android:background="@color/white"
-            />
+        android:layout_height="match_parent">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/post_title"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/upvote_count"
-            android:text="10"
-            android:layout_marginRight="10dp"/>
-
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/downvote_btn"
-            android:src="@drawable/ic_baseline_thumb_down_24"
-            android:background="@color/white"
-            />
+            android:layout_margin="5dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Title"
+            android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/post_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/post_title"
+            android:layout_margin="5dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="Description" />
+
+        <LinearLayout
+            android:id="@+id/vote_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/downvote_count"
-            android:text="10"/>
+            android:layout_below="@+id/post_desc"
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            android:padding="5dp">
 
-    </LinearLayout>
+            <ImageButton
+                android:id="@+id/upvote_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:src="@drawable/ic_baseline_thumb_up_24" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Read More"
-        android:id="@+id/show_post_btn"
-        android:layout_below="@+id/post_desc"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="20dp"
-        />
+            <TextView
+                android:id="@+id/upvote_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="10" />
 
 
-</RelativeLayout>
+            <ImageButton
+                android:id="@+id/downvote_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:src="@drawable/ic_baseline_thumb_down_24" />
+
+            <TextView
+                android:id="@+id/downvote_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/show_post_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/post_desc"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:text="Read More" />
+
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>
