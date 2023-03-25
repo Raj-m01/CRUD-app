@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.crudapp.architecture.PostViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,6 +36,12 @@ public class MainActivity extends AppCompatActivity {
         postViewModel.getAllPosts().observe(this, new Observer<List<PostModel>>() {
             @Override
             public void onChanged(List<PostModel> posts) {
+                Collections.sort(posts, new Comparator<PostModel>() {
+                    @Override
+                    public int compare(PostModel post1, PostModel post2) {
+                        return Integer.compare(post2.getUpvote(), post1.getUpvote());
+                    }
+                });
                 adapter.updatePostList(posts);
             }
         });

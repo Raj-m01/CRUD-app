@@ -29,12 +29,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.ViewHo
     public void updatePostList(List<PostModel> postData) {
         this.postData.clear();
         this.postData.addAll(postData);
-        Collections.sort(postData, new Comparator<PostModel>() {
-            @Override
-            public int compare(PostModel post1, PostModel post2) {
-                return Integer.compare(post2.getUpvote(), post1.getUpvote());
-            }
-        });
+
         Log.d("db", "list updated");
         notifyDataSetChanged();
     }
@@ -55,7 +50,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull PostListAdapter.ViewHolder holder, int position) {
-        final PostModel post = postData.get(position);
+        final PostModel post = postData.get(holder.getAdapterPosition());
         holder.postTitle.setText(post.getTitle());
         holder.postDesc.setText(post.getDescription());
         holder.upvote.setText(String.valueOf(post.getUpvote()));
