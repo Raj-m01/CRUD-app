@@ -12,8 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.crudapp.architecture.PostViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,12 +34,6 @@ public class MainActivity extends AppCompatActivity {
         postViewModel.getAllPosts().observe(this, new Observer<List<PostModel>>() {
             @Override
             public void onChanged(List<PostModel> posts) {
-                Collections.sort(posts, new Comparator<PostModel>() {
-                    @Override
-                    public int compare(PostModel post1, PostModel post2) {
-                        return Integer.compare(post2.getUpvote(), post1.getUpvote());
-                    }
-                });
                 adapter.updatePostList(posts);
             }
         });
@@ -50,12 +42,13 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         addPostBtn.setOnClickListener(view -> {
-
-            Intent intent = new Intent(MainActivity.this, AddPostActivity.class);
-            intent.putExtra("ACTION_TYPE", "ADD");
+            // Create an Intent to start the AddUpdatePostActivity
+            Intent intent = new Intent(MainActivity.this, AddUpdatePostActivity.class);
+            // Add an extra to specify that we want to add a new post
+            intent.putExtra(Constants.ACTION_TYPE, Constants.ACTION_TYPE_ADD);
+            // Start the AddUpdatePostActivity
             startActivity(intent);
         });
-
 
     }
 }

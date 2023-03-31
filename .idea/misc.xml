@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/RAJ MANJREKAR/AndroidStudioProjects/CrudApp/app/src/main/res/drawable/ic_baseline_thumb_down_24.xml" value="0.1935" />
+        <entry key="..\:/Users/RAJ MANJREKAR/AndroidStudioProjects/CrudApp/app/src/main/res/drawable/ic_baseline_thumb_up_24.xml" value="0.1935" />
         <entry key="..\:/Users/RAJ MANJREKAR/AndroidStudioProjects/CrudApp/app/src/main/res/layout/activity_main.xml" value="0.29923273657289" />
         <entry key="..\:/Users/RAJ MANJREKAR/AndroidStudioProjects/CrudApp/app/src/main/res/layout/activity_show_post.xml" value="0.22" />
         <entry key="..\:/Users/RAJ MANJREKAR/AndroidStudioProjects/CrudApp/app/src/main/res/layout/activity_update_post.xml" value="0.25" />

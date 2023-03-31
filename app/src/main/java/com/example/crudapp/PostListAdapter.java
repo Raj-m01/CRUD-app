@@ -2,7 +2,6 @@ package com.example.crudapp;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.crudapp.architecture.PostViewModel;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.ViewHolder> {
@@ -30,7 +27,6 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.ViewHo
         this.postData.clear();
         this.postData.addAll(postData);
 
-        Log.d("db", "list updated");
         notifyDataSetChanged();
     }
 
@@ -58,13 +54,13 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.ViewHo
 
         holder.showPostButton.setOnClickListener(view -> {
             Intent intent = new Intent(context, ShowPostActivity.class);
-            intent.putExtra("POST_ID", post.getId());
-            intent.putExtra("POST_TITLE", post.getTitle());
-            intent.putExtra("POST_DESC", post.getDescription());
-            intent.putExtra("POST_AUTHOR", post.getAuthor());
-            intent.putExtra("POST_DATE", post.getDate());
-            intent.putExtra("POST_UPVOTE_COUNT", post.getUpvote());
-            intent.putExtra("POST_DOWNVOTE_COUNT", post.getDownvote());
+            intent.putExtra(Constants.POST_ID, post.getId());
+            intent.putExtra(Constants.POST_TITLE, post.getTitle());
+            intent.putExtra(Constants.POST_DESC, post.getDescription());
+            intent.putExtra(Constants.POST_AUTHOR, post.getAuthor());
+            intent.putExtra(Constants.POST_DATE, post.getDate());
+            intent.putExtra(Constants.POST_UPVOTE_COUNT, post.getUpvote());
+            intent.putExtra(Constants.POST_DOWNVOTE_COUNT, post.getDownvote());
             context.startActivity(intent);
         });
 

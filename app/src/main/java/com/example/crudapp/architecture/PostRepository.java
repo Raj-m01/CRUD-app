@@ -1,7 +1,6 @@
 package com.example.crudapp.architecture;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
@@ -21,8 +20,6 @@ public class PostRepository {
     }
 
     public LiveData<List<PostModel>> getAllPosts() {
-        Log.d("db","get all called");
-
         return allPosts;
     }
 
