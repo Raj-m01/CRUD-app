@@ -14,36 +14,38 @@ import com.example.crudapp.architecture.PostViewModel;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class AddPostActivity extends AppCompatActivity {
+public class AddUpdatePostActivity extends AppCompatActivity {
 
     EditText titleEditText, descEditText, authorEditText;
     Button submitPostBtn;
     private PostViewModel postViewModel;
-    private static final String SUCCESS = "SUCCESS";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_post);
 
+        // Get the ViewModel
         postViewModel = new ViewModelProvider(this).get(PostViewModel.class);
 
+        // Find the UI elements by their IDs
         titleEditText = findViewById(R.id.title_edit_text);
         descEditText = findViewById(R.id.desc_edit_text);
         authorEditText = findViewById(R.id.author_edit_text);
         submitPostBtn = findViewById(R.id.submit_post_btn);
 
+        // Get the intent and the action type from it
         Intent intent = getIntent();
-        String actionType = intent.getStringExtra("ACTION_TYPE");
+        String actionType = intent.getStringExtra(Constants.ACTION_TYPE);
 
-
-        if (actionType.equals("EDIT")) {
-            titleEditText.setText(intent.getStringExtra("POST_TITLE"));
-            descEditText.setText(intent.getStringExtra("POST_DESC"));
-            authorEditText.setText(intent.getStringExtra("POST_AUTHOR"));
+        // If the action type is EDIT, populate the UI with the existing post details
+        if (actionType.equals(Constants.ACTION_TYPE_EDIT)) {
+            titleEditText.setText(intent.getStringExtra(Constants.POST_TITLE));
+            descEditText.setText(intent.getStringExtra(Constants.POST_DESC));
+            authorEditText.setText(intent.getStringExtra(Constants.POST_AUTHOR));
         }
 
-
+        // When the submit button is clicked, get the input data, create a new post object, and save it to the database
         submitPostBtn.setOnClickListener(view -> {
 
             String title = titleEditText.getText().toString().trim();
@@ -55,24 +57,24 @@ public class AddPostActivity extends AppCompatActivity {
 
             String result = "";
 
-            if (actionType.equals("ADD")) {
+            // If the action type is ADD, insert the new post into the database
+            if (actionType.equals(Constants.ACTION_TYPE_ADD)) {
                 result = postViewModel.insert(post);
-            } else {
-                int id = intent.getIntExtra("POST_ID", -1);
+            }
+            // If the action type is EDIT, update the existing post in the database
+            else {
+                int id = intent.getIntExtra(Constants.POST_ID, -1);
                 post.setId(id);
                 result = postViewModel.update(post);
             }
 
-            if (result.equals(SUCCESS)) {
+            // If the operation is successful, go back to the MainActivity, else show a Toast with the error message
+            if (result.equals(Constants.SUCCESS)) {
                 startActivity(new Intent(this, MainActivity.class));
                 this.finish();
             } else {
                 Toast.makeText(this, "" + result, Toast.LENGTH_SHORT).show();
             }
-
-
         });
-
     }
-
 }

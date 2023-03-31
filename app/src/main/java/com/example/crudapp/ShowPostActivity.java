@@ -37,33 +37,34 @@ public class ShowPostActivity extends AppCompatActivity {
         postViewModel = new ViewModelProvider(this).get(PostViewModel.class);
 
         Intent intent = getIntent();
-        String title = intent.getStringExtra("POST_TITLE");
-        String desc = intent.getStringExtra("POST_DESC");
-        String author = intent.getStringExtra("POST_AUTHOR");
-        String date = intent.getStringExtra("POST_DATE");
-        int upvotes = intent.getIntExtra("POST_UPVOTE_COUNT", 0);
-        int downvotes = intent.getIntExtra("POST_DOWNVOTE_COUNT", 0);
+        String title = intent.getStringExtra(Constants.POST_TITLE);
+        String desc = intent.getStringExtra(Constants.POST_DESC);
+        String author = intent.getStringExtra(Constants.POST_AUTHOR);
+        String date = intent.getStringExtra(Constants.POST_DATE);
+        int upvotes = intent.getIntExtra(Constants.POST_UPVOTE_COUNT, 0);
+        int downvotes = intent.getIntExtra(Constants.POST_DOWNVOTE_COUNT, 0);
 
         postTitleView.setText(title);
         postDescView.setText(desc);
         postAuthorView.setText(author);
         postDateView.setText(date);
-        upvoteCountView.setText("" + upvotes);
-        downvoteCountView.setText("" + downvotes);
+        upvoteCountView.setText(String.valueOf(upvotes));
+        downvoteCountView.setText(String.valueOf(downvotes));
 
         int id = intent.getIntExtra("POST_ID", -1);
 
         editBtn.setOnClickListener(view -> {
 
-            Intent editIntent = new Intent(this, AddPostActivity.class);
-            editIntent.putExtra("ACTION_TYPE", "EDIT");
-            editIntent.putExtra("POST_ID", id);
-            editIntent.putExtra("POST_TITLE", title);
-            editIntent.putExtra("POST_DESC", desc);
-            editIntent.putExtra("POST_AUTHOR", author);
-            editIntent.putExtra("POST_DATE", date);
-            editIntent.putExtra("POST_UPVOTE_COUNT", upvotes);
-            editIntent.putExtra("POST_DOWNVOTE_COUNT", downvotes);
+            Intent editIntent = new Intent(this, AddUpdatePostActivity.class);
+            editIntent.putExtra(Constants.ACTION_TYPE, Constants.ACTION_TYPE_EDIT);
+            editIntent.putExtra(Constants.POST_ID, id);
+            editIntent.putExtra(Constants.POST_TITLE, title);
+            editIntent.putExtra(Constants.POST_DESC, desc);
+            editIntent.putExtra(Constants.POST_AUTHOR, author);
+            editIntent.putExtra(Constants.POST_DATE, date);
+            editIntent.putExtra(Constants.POST_UPVOTE_COUNT, upvotes);
+            editIntent.putExtra(Constants.POST_DOWNVOTE_COUNT, downvotes);
+
             startActivity(editIntent);
             this.finish();
 
